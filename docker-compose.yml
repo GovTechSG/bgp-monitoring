@@ -1,0 +1,18 @@
+version: '2'
+services:
+  grafana:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    links:
+      - prometheus
+  prometheus:
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    image: prom/prometheus
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
